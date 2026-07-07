@@ -1,0 +1,28 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: ai-food-tracker-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: food_user
+      POSTGRES_PASSWORD: food_password
+      POSTGRES_DB: ai_food_tracker
+    ports:
+      - "5432:5432"
+    volumes:
+      - ai_food_tracker_postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: ai-food-tracker-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin_password
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+volumes:
+  ai_food_tracker_postgres_data:
