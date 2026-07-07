@@ -18,4 +18,8 @@ public class User
     public NutritionGoal? NutritionGoal{get;set;}
 
     public List<WeightEntry> WeightEntries{get;set;}=new();
+    public List<Product> Products{get;set;}=new();
+    public List<ProductStock> ProductStocks{get;set;}=new();
+    public List<FoodEntry> FoodEntries{get;set;}=new();
+    public List<DrinkEntry> DrinkEntries{get;set;}=new();
 }
