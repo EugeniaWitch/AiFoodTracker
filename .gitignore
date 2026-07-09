@@ -13,3 +13,11 @@ client/out
 server/node_modules
 server/dist
 server/.env
+server/appsettings.Development.json
+serer/appsettings.*.local.json
+
+# .NET build output
+**/bin/
+**/obj/
+bin/
+obj/
