@@ -9,6 +9,7 @@ dist
 client/node_modules
 client/.next
 client/out
+client/.env.local
 
 server/node_modules
 server/dist
