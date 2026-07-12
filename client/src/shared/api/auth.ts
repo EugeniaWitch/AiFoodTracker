@@ -2,6 +2,7 @@ import {
     AuthResponse,
     LoginRequest,
     RegisterRequest,
+    CurrentUserResponse,
 } from "@/shared/types/auth";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
@@ -38,4 +39,19 @@ export function registerUser(data:RegisterRequest) : Promise<AuthResponse>{
 
 export function loginUser(data:LoginRequest): Promise<AuthResponse>{
     return requestAuth("/api/auth/login", data);
+}
+
+export async function getCurrentUser(token:string) : Promise<CurrentUserResponse>{
+    const response = await fetch(`${API_URL}/api/auth/me`,{
+        method: "GET",
+        headers:{
+            Authorization: `Bearer ${token}`,
+        }
+    });
+
+    if (!response.ok){
+        throw new Error(`Failed to get current user.Status: ${response.status}`);
+    }
+
+    return response.json();
 }

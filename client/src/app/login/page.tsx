@@ -3,6 +3,7 @@
 import { type FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/shared/api/auth";
+import styles from "./page.module.css";
 
 export default function LoginPage(){
     const router = useRouter();
@@ -39,29 +40,32 @@ export default function LoginPage(){
     }
         
     return(
-        <main>
-            <h1>Вход</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
+        <main className={styles.page}>
+            <div className={styles.login}>
+            <h1 className={styles.title}>Вход</h1>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.field}>
                     <label htmlFor="email">Email</label>
                     <input id="email"
                         type = "email"
                         value={email}
-                        onChange={(event) => setEmail(event.target.value)}></input>
+                        onChange={(event) => setEmail(event.target.value)}
+                        className={styles.input}></input>
                 </div>
-                <div>
+                <div className={styles.field}>
                     <label htmlFor="password">Пароль</label>
                     <input id="password"
                         type="password"
                         value={password}
-                        onChange={(event) => setPassword(event.target.value)}></input>
+                        onChange={(event) => setPassword(event.target.value)}
+                        className={styles.input}></input>
                 </div>
 
-                {error && <p>{error}</p>}
+                {error && <p className={styles.error} role="alert">{error}</p>}
 
-                <button type="submit" 
+                <button type="submit" className={styles.button} 
                     disabled={isLoading}>{isLoading ? "Входим..":"Войти"}</button>
-            </form>
+            </form></div>
         </main>
     );
 }

@@ -1,0 +1,70 @@
+.page{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:var(--color-bg);
+    padding: 30px 30px;
+}
+
+.register{
+    max-width: 400px;
+    width: 100%;
+    background-color:var(--color-blocks);
+    border: 1px solid var(--color-boundaries);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-main-text);
+    padding: 20px 30px;
+    font-family: 'Onest';
+}
+
+.title{
+    margin: 10px 10px;
+    font-size: 24px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.field{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 10px;
+}
+
+.input{
+    width: 75%;
+    border: 1px solid var(--color-boundaries);
+    border-radius: 15px;
+    padding: 5px 15px;
+}
+
+.button{
+    background-color: var(--color-main-text);
+    color: var(--color-blocks);
+    border-radius: 20px;
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px
+}
+
+.error{
+    color: var(--color-not);
+    background-color: var(--color-alert);
+    border: 1px solid var(--color-not);
+    padding: 10px 30px;
+    border-radius: 10px;
+}

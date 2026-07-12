@@ -16,3 +16,10 @@ export type AuthResponse = {
     email: string;
     role: string;
 };
+
+export type CurrentUserResponse = {
+    userId: string;
+    name: string;
+    email: string;
+    role: string;
+}
