@@ -4,6 +4,7 @@ import { type FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/shared/api/auth";
 import styles from "./page.module.css";
+import { saveAuthToken } from "@/shared/lib/authToken";
 
 export default function RegisterPage(){
     const router = useRouter();
@@ -28,7 +29,7 @@ export default function RegisterPage(){
                 password,
             });
 
-            localStorage.setItem("token",response.token);
+            saveAuthToken(response.token);
             router.push("/");
         } catch (error){
             if (error instanceof Error){

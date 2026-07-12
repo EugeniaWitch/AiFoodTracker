@@ -1,40 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getCurrentUser } from "@/shared/api/auth";
-import type { CurrentUserResponse } from "@/shared/types/auth";
+import { removeAuthToken } from "@/shared/lib/authToken";
+import { useCurrentUser } from "@/features/auth/hooks/useCurrentUser";
 
 export default function ProfilePage(){
     const router = useRouter();
-
-    const [user, setUser] = useState<CurrentUserResponse| null >(null);
-    const [error, setError] = useState("");
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        async function loadUser() {
-            const token = localStorage.getItem("token");
-            if (!token){
-                router.push("/login");
-                return;
-            }
-            try {
-                const currentUser = await getCurrentUser(token);
-                setUser(currentUser);
-            } catch {
-                localStorage.removeItem("token");
-                setError("Сессия истекла или токен недействителен");
-                router.push("/login");
-            } finally {
-                setIsLoading(false);
-            }
-        }
-        loadUser();
-    }, [router]);
-
+    const { user, error, isLoading } = useCurrentUser();
+    
     function handleSubmit(){
-        localStorage.removeItem("token");
+        removeAuthToken();
         router.push("/login");
     }
 

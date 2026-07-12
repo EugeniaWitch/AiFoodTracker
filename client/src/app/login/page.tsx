@@ -4,6 +4,7 @@ import { type FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/shared/api/auth";
 import styles from "./page.module.css";
+import { saveAuthToken } from "@/shared/lib/authToken";
 
 export default function LoginPage(){
     const router = useRouter();
@@ -26,7 +27,7 @@ export default function LoginPage(){
                 password,
             });
 
-            localStorage.setItem("token",response.token);
+            saveAuthToken(response.token);
             router.push("/");
         } catch (error){
             if (error instanceof Error){
