@@ -49,7 +49,11 @@ export default function LoginPage(){
                     <input id="email"
                         type = "email"
                         value={email}
-                        onChange={(event) => setEmail(event.target.value)}
+                        required
+                        autoComplete="email"
+                        onChange={(event) => {setEmail(event.target.value);
+                                                setError("");
+                        }}
                         className={styles.input}></input>
                 </div>
                 <div className={styles.field}>
@@ -57,7 +61,11 @@ export default function LoginPage(){
                     <input id="password"
                         type="password"
                         value={password}
-                        onChange={(event) => setPassword(event.target.value)}
+                        required
+                        autoComplete="current-password"
+                        onChange={(event) => {setPassword(event.target.value);
+                                                setError("");
+                        }}
                         className={styles.input}></input>
                 </div>
 

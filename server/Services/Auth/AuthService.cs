@@ -25,6 +25,19 @@ public class AuthService : IAuthService
         var email = request.Email.Trim().ToLower();
         var name = request.Name.Trim();
 
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new InvalidOperationException("Name is required");
+        }
+        if (string.IsNullOrWhiteSpace(email))
+        {
+            throw new InvalidOperationException("Email is required");
+        }
+        if (string.IsNullOrWhiteSpace(request.Password))
+        {
+            throw new InvalidOperationException("Password is required");
+        }
+
         var userExists = await _context.Users.AnyAsync(u => u.Email == email);
         if (userExists)
         {
@@ -87,6 +100,11 @@ public class AuthService : IAuthService
     public async Task<AuthResponse> LoginAsync(LoginRequest request)
     {
         var email = request.Email.Trim().ToLower();
+
+        if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
+        {
+            throw new InvalidOperationException("Invalid email or password");
+        }
         
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         if (user == null)

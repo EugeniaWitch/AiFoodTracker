@@ -50,7 +50,12 @@ export default function RegisterPage(){
                     <input id="name"
                         type = "text"
                         value={name}
-                        onChange={(event) => setName(event.target.value)}
+                        required
+                        minLength={3}
+                        maxLength={20}
+                        autoComplete="name"
+                        onChange={(event) => {setName(event.target.value); 
+                                                setError("");}}
                         className={styles.input}>
                     </input>
                 </div>
@@ -59,7 +64,12 @@ export default function RegisterPage(){
                     <input id="email"
                         type = "email"
                         value={email}
-                        onChange={(event) => setEmail(event.target.value)}
+                        required
+                        maxLength={100}
+                        autoComplete="email"
+                        onChange={(event) => {setEmail(event.target.value);
+                                                setError("");
+                        }}
                         className={styles.input}></input>
                 </div>
                 <div className={styles.field}>
@@ -67,7 +77,13 @@ export default function RegisterPage(){
                     <input id="password"
                         type="password"
                         value={password}
-                        onChange={(event) => setPassword(event.target.value)}
+                        required
+                        minLength={6}
+                        maxLength={100}
+                        autoComplete="new-password"
+                        onChange={(event) => {setPassword(event.target.value);
+                                                setError("");
+                        }}
                         className={styles.input}></input>
                 </div>
 
