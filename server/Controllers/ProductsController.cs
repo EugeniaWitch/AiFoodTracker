@@ -41,6 +41,29 @@ public class ProductController : ControllerBase
         }
     }
 
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult<ProductResponse>> UpdateProduct(Guid id, UpdateProductRequest request)
+    {
+        try
+        {
+            var userId = GetCurrentUserId();
+
+            var product = await _productService.UpdateProductAsync(
+                userId,
+                id,
+                request
+            );
+
+            return Ok(product);
+        } catch (KeyNotFoundException exception)
+        {
+            return NotFound(new { message = exception.Message});
+        } catch (InvalidOperationException exception)
+        {
+            return BadRequest(new { message = exception.Message});
+        }
+    }
+
     private Guid GetCurrentUserId()
     {
         var userIdValue = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

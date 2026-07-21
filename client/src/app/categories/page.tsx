@@ -43,7 +43,6 @@ export default function CategoriesPage(){
                 <button type="button" onClick={() => setSelectedType(undefined)}>Все</button>
                 <button type="button" onClick={() => setSelectedType("Food")}>Еда</button>
                 <button type="button" onClick={() => setSelectedType("Drink")}>Напитки</button>
-                <button type="button" onClick={() => setSelectedType("Dish")}>Блюда</button>
             </div>
 
             {isLoading && <p>Загрузка</p>}

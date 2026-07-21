@@ -1,0 +1,136 @@
+.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    align-items: start;
+}
+
+.item {
+    min-width: 0;
+    border: 1px solid var(--color-boundaries);
+    border-radius: 16px;
+    padding: 16px 20px;
+    background-color: var(--color-blocks);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.mainInfo {
+    min-width: 0;
+    display: grid;
+    gap: 4px;
+}
+
+.title {
+    color: var(--color-main-text);
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.summary {
+    color: var(--color-second-text);
+    margin: 0;
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+
+.actions {
+    flex-shrink: 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.button {
+    color: var(--color-second-text);
+    border: 1px solid var(--color-boundaries);
+    border-radius: 10px;
+    padding: 8px 12px;
+    background-color: var(--color-blocks);
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: var(--color-primary-light);
+    color:var(--color-main-text);
+    border-color: var(--color-main-text);
+}
+
+.details {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-boundaries);
+}
+
+.nutritionGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 120px), 1fr));
+    gap: 10px;
+}
+
+.nutritionCell {
+    min-width: 0;
+    border-radius: 12px;
+    padding: 10px 12px;
+    background-color: var(--color-blocks);
+}
+
+.nutritionLabel {
+    display: block;
+    color: var(--color-main-text);
+    font-size: 13px;
+}
+
+.nutritionValue {
+    display: block;
+    margin-top: 2px;
+    font-weight: 600;
+    color: var(--color-main-text);
+}
+
+.extra {
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+@media (max-width: 720px) {
+    .list {
+        grid-template-columns: 1fr;
+    }
+
+
+
+    .nutritionGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 420px) {
+    .nutritionGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        flex-direction: column;
+    }
+
+    .actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .button {
+        width: 100%;
+    }
+}

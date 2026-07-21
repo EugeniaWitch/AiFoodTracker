@@ -9,6 +9,9 @@
   --color-boundaries: #DDD5C8;
   --color-not: #C94C4C;
   --color-alert: #FDEDED;
+  --color-primary: #3F7D58;
+  --color-primary-hover: #34694A;
+  --color-primary-light: #DDEBDD;
 }
 
 @theme inline {

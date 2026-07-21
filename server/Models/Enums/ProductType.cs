@@ -2,7 +2,6 @@ namespace server.Models.Enums;
 
 public enum ProductType
 {
-    Food,
-    Drink,
-    Dish
+    Food = 0,
+    Drink = 1
 }

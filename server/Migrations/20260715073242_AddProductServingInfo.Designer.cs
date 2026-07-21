@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using server.Data;
@@ -11,9 +12,11 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260715073242_AddProductServingInfo")]
+    partial class AddProductServingInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,13 +190,10 @@ namespace server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Brand")
-                        .HasColumnType("text");
-
-                    b.Property<double>("Calories")
+                    b.Property<double>("CaloriesPer100")
                         .HasColumnType("double precision");
 
-                    b.Property<double>("Carbs")
+                    b.Property<double>("CarbsPer100")
                         .HasColumnType("double precision");
 
                     b.Property<Guid>("CategoryId")
@@ -205,38 +205,35 @@ namespace server.Migrations
                     b.Property<int>("DefaultUnit")
                         .HasColumnType("integer");
 
-                    b.Property<double>("Fat")
+                    b.Property<double>("FatPer100")
                         .HasColumnType("double precision");
 
-                    b.Property<double?>("Fiber")
+                    b.Property<double?>("FiberPer100")
                         .HasColumnType("double precision");
 
-                    b.Property<double?>("IronMg")
+                    b.Property<double?>("IronMgPer100")
                         .HasColumnType("double precision");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<double>("NutritionAmount")
-                        .HasColumnType("double precision");
-
-                    b.Property<int>("NutritionUnit")
-                        .HasColumnType("integer");
-
                     b.Property<Guid?>("OwnerId")
                         .HasColumnType("uuid");
 
-                    b.Property<double>("Protein")
+                    b.Property<double>("ProteinPer100")
                         .HasColumnType("double precision");
 
-                    b.Property<string>("ServingDescription")
+                    b.Property<string>("ServingDescriprion")
                         .HasColumnType("text");
 
                     b.Property<double?>("ServingSize")
                         .HasColumnType("double precision");
 
-                    b.Property<double?>("Sugar")
+                    b.Property<int?>("ServingSizeUnit")
+                        .HasColumnType("integer");
+
+                    b.Property<double?>("SugarPer100")
                         .HasColumnType("double precision");
 
                     b.Property<int>("Type")
@@ -335,48 +332,6 @@ namespace server.Migrations
                         new
                         {
                             Id = new Guid("10000000-0000-0000-0000-000000000008"),
-                            Icon = "soup",
-                            Name = "Суп",
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0000-000000000009"),
-                            Icon = "salad",
-                            Name = "Салат",
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0000-000000000010"),
-                            Icon = "main-dish",
-                            Name = "Основное блюдо",
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0000-000000000011"),
-                            Icon = "side-dish",
-                            Name = "Гарнир",
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0000-000000000012"),
-                            Icon = "dessert",
-                            Name = "Десерт",
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0000-000000000013"),
-                            Icon = "bakery",
-                            Name = "Выпечка",
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0000-000000000014"),
                             Icon = "other-food",
                             Name = "Другое",
                             Type = 0
@@ -429,6 +384,55 @@ namespace server.Migrations
                             Icon = "other-drink",
                             Name = "Другое",
                             Type = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000001"),
+                            Icon = "soup",
+                            Name = "Суп",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000002"),
+                            Icon = "salad",
+                            Name = "Салат",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000003"),
+                            Icon = "main-dish",
+                            Name = "Основное блюдо",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000004"),
+                            Icon = "side-dish",
+                            Name = "Гарнир",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000005"),
+                            Icon = "dessert",
+                            Name = "Десерт",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000006"),
+                            Icon = "bakery",
+                            Name = "Выпечка",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("30000000-0000-0000-0000-000000000007"),
+                            Icon = "other-dish",
+                            Name = "Другое",
+                            Type = 2
                         });
                 });
 

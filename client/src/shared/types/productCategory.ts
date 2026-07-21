@@ -1,4 +1,4 @@
-export type ProductCategoryType = "Food" | "Drink" | "Dish"
+export type ProductCategoryType = "Food" | "Drink"
 
 export type ProductCategoryResponse = {
     id: string;

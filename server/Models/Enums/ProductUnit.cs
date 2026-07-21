@@ -2,8 +2,7 @@ namespace server.Models.Enums;
 
 public enum ProductUnit
 {
-    Gram,
-    Ml,
-    Piece,
-    Portion
+    Gram = 0,
+    Ml = 1,
+    Portion = 2
 }

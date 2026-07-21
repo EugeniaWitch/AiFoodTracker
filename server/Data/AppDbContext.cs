@@ -140,9 +140,45 @@ public class AppDbContext : DbContext
            Name = "Сладкое",
            Type = ProductType.Food,
            Icon = "sweet"
-        }, new
+        },new
         {
             Id = Guid.Parse("10000000-0000-0000-0000-000000000008"),
+           Name = "Суп",
+           Type = ProductType.Food,
+           Icon = "soup"
+        }, new
+        {
+            Id = Guid.Parse("10000000-0000-0000-0000-000000000009"),
+           Name = "Салат",
+           Type = ProductType.Food,
+           Icon = "salad"
+        }, new
+        {
+            Id = Guid.Parse("10000000-0000-0000-0000-000000000010"),
+           Name = "Основное блюдо",
+           Type = ProductType.Food,
+           Icon = "main-dish"
+        }, new
+        {
+            Id = Guid.Parse("10000000-0000-0000-0000-000000000011"),
+           Name = "Гарнир",
+           Type = ProductType.Food,
+           Icon = "side-dish"
+        }, new
+        {
+            Id = Guid.Parse("10000000-0000-0000-0000-000000000012"),
+           Name = "Десерт",
+           Type = ProductType.Food,
+           Icon = "dessert"
+        }, new
+        {
+            Id = Guid.Parse("10000000-0000-0000-0000-000000000013"),
+           Name = "Выпечка",
+           Type = ProductType.Food,
+           Icon = "bakery"
+        }, new
+        {
+            Id = Guid.Parse("10000000-0000-0000-0000-000000000014"),
            Name = "Другое",
            Type = ProductType.Food,
            Icon = "other-food"
@@ -190,50 +226,7 @@ public class AppDbContext : DbContext
            Name = "Другое",
            Type = ProductType.Drink,
            Icon = "other-drink"
-        },
-
-        new
-        {
-            Id = Guid.Parse("30000000-0000-0000-0000-000000000001"),
-           Name = "Суп",
-           Type = ProductType.Dish,
-           Icon = "soup"
-        }, new
-        {
-            Id = Guid.Parse("30000000-0000-0000-0000-000000000002"),
-           Name = "Салат",
-           Type = ProductType.Dish,
-           Icon = "salad"
-        }, new
-        {
-            Id = Guid.Parse("30000000-0000-0000-0000-000000000003"),
-           Name = "Основное блюдо",
-           Type = ProductType.Dish,
-           Icon = "main-dish"
-        }, new
-        {
-            Id = Guid.Parse("30000000-0000-0000-0000-000000000004"),
-           Name = "Гарнир",
-           Type = ProductType.Dish,
-           Icon = "side-dish"
-        }, new
-        {
-            Id = Guid.Parse("30000000-0000-0000-0000-000000000005"),
-           Name = "Десерт",
-           Type = ProductType.Dish,
-           Icon = "dessert"
-        }, new
-        {
-            Id = Guid.Parse("30000000-0000-0000-0000-000000000006"),
-           Name = "Выпечка",
-           Type = ProductType.Dish,
-           Icon = "bakery"
-        }, new
-        {
-            Id = Guid.Parse("30000000-0000-0000-0000-000000000007"),
-           Name = "Другое",
-           Type = ProductType.Dish,
-           Icon = "other-dish"
-        });
+        }
+        );
     }
 }

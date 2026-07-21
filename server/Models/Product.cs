@@ -6,6 +6,7 @@ public class Product
 {
     public Guid Id{get;set;}
     public string Name{get;set;}=string.Empty;
+    public string? Brand{get;set;}
     public ProductType Type{get;set;}
     public ProductVisibility Visibility{get;set;} = ProductVisibility.Public;
     
@@ -15,15 +16,21 @@ public class Product
     public Guid? OwnerId{get;set;}
     public User? Owner{get;set;}
 
-    public double CaloriesPer100{get;set;}
-    public double ProteinPer100{get;set;}
-    public double FatPer100{get;set;}
-    public double CarbsPer100{get;set;}
-    public double? SugarPer100{get;set;}
-    public double? FiberPer100{get;set;}
-    public double? IronMgPer100{get;set;}
+    public double Calories{get;set;}
+    public double Protein{get;set;}
+    public double Fat{get;set;}
+    public double Carbs{get;set;}
+    public double? Sugar{get;set;}
+    public double? Fiber{get;set;}
+    public double? IronMg{get;set;}
 
     public ProductUnit DefaultUnit{get;set;}
+
+    public double NutritionAmount{get;set;}
+    public ProductUnit NutritionUnit{get;set;}
+
+    public double? ServingSize{get;set;}
+    public string? ServingDescription{get;set;}
 
     public DateTime CreatedAt{get;set;} = DateTime.UtcNow;
     public DateTime UpdatedAt{get;set;} = DateTime.UtcNow;
