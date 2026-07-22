@@ -1,14 +1,20 @@
 export type ProductType = "Food"  | "Drink";
 
-export type ProductVisibility = "Public" | "Private"
+export type ProductVisibility = "Public" | "Private";
 
-export type ProductUnit = "Gram" | "Ml" | "Portion"
+export type ProductUnit = "Gram" | "Ml" | "Portion";
+
+export type ProductSourceType = "Custom" | "Branded";
+
+export type ProductReviewStatus = "NotSubmitted" | "PendingReview" | "Approved" | "Rejected";
 
 export type ProductResponse = {
     id: string;
     name: string;
     brand: string | null;
 
+    sourceType:ProductSourceType;
+    reviewStatus: ProductReviewStatus;
     type: ProductType;
     visibility: ProductVisibility;
 
@@ -44,7 +50,7 @@ export type CreateProductRequest ={
     type: ProductType;
     brand?: string | null;
     categoryId: string;
-    visibility: ProductVisibility;
+    sourceType:ProductSourceType;
 
     calories: number;
     protein: number;
@@ -63,3 +69,5 @@ export type CreateProductRequest ={
     servingSize?: number | null;
     servingDescription?: string | null;
 }
+
+export type UpdateProductRequest = CreateProductRequest;

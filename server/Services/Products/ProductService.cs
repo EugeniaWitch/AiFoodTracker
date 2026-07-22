@@ -56,6 +56,10 @@ public class ProductService : IProductService
 
         var nutritionUnit = request.NutritionUnit
             ?? throw new InvalidOperationException("Nutrition unit is required");
+        var sourceType = request.SourceType
+            ?? throw new InvalidOperationException("Source type is required");
+        
+        var normalizedBrand =  NormalizeBrand(sourceType,request.Brand); 
 
         ValidateUnits(type, defaultUnit, nutritionUnit);
         ValidateServingInfoIfNeeded(type, defaultUnit, nutritionUnit, request.ServingSize);
@@ -78,9 +82,11 @@ public class ProductService : IProductService
         {
             Id = Guid.NewGuid(),
             Name = name,
-            Brand = string.IsNullOrWhiteSpace(request.Brand) ? null : request.Brand.Trim(),
+            Brand = normalizedBrand,
+            SourceType = sourceType,
+            ReviewStatus = GetReviewStatusForCreate(sourceType),
+            Visibility = ProductVisibility.Private,
             Type = type,
-            Visibility = request.Visibility,
             CategoryId = request.CategoryId,
             OwnerId = userId,
             NutritionAmount = request.NutritionAmount,
@@ -125,9 +131,16 @@ public class ProductService : IProductService
             throw new InvalidOperationException("Name is required");
         }
 
-        var type = request.Type ?? throw new InvalidOperationException("Product type is required");
-        var defaultUnit = request.DefaultUnit ?? throw new InvalidOperationException("Default unir is required");
-        var nutritionUnit = request.NutritionUnit ?? throw new InvalidOperationException("Nutrition unit is required");
+        var type = request.Type 
+            ?? throw new InvalidOperationException("Product type is required");
+        var defaultUnit = request.DefaultUnit 
+            ?? throw new InvalidOperationException("Default unir is required");
+        var nutritionUnit = request.NutritionUnit 
+            ?? throw new InvalidOperationException("Nutrition unit is required");
+        var sourceType = request.SourceType 
+            ?? throw new InvalidOperationException("Source type is required");
+
+        var normalizedBrand = NormalizeBrand(sourceType,request.Brand);
 
         ValidateUnits(type, defaultUnit, nutritionUnit);
         ValidateServingInfoIfNeeded(type, defaultUnit, nutritionUnit, request.ServingSize);
@@ -165,9 +178,11 @@ public class ProductService : IProductService
         }
 
         productToSave.Name = name;
-        productToSave.Brand = string.IsNullOrWhiteSpace(request.Brand) ? null : request.Brand.Trim();
+        productToSave.Brand = normalizedBrand;
+        productToSave.SourceType=sourceType;
+        productToSave.ReviewStatus=GetReviewStatusForUpdate(existingProduct,userOwnsProduct,sourceType);
+        productToSave.Visibility=ProductVisibility.Private;
         productToSave.Type = type;
-        productToSave.Visibility = userOwnsProduct ? request.Visibility : ProductVisibility.Private;
         productToSave.CategoryId = request.CategoryId;
         productToSave.Category = category;
         productToSave.NutritionAmount = request.NutritionAmount;
@@ -199,6 +214,8 @@ public class ProductService : IProductService
             Id = product.Id,
             Name = product.Name,
             Brand=product.Brand,
+            SourceType = product.SourceType.ToString(),
+            ReviewStatus = product.ReviewStatus.ToString(),
             Type = product.Type.ToString(),
             Visibility = product.Visibility.ToString(),
             CategoryId = product.CategoryId,
@@ -277,5 +294,45 @@ public class ProductService : IProductService
         return type == ProductType.Drink
             ? ProductUnit.Ml
             : ProductUnit.Gram;
+    }
+
+    private static string? NormalizeBrand(ProductSourceType sourceType, string? brand)
+    {
+        if (sourceType == ProductSourceType.Custom)
+        {
+            return null;
+        }
+
+        if (string.IsNullOrWhiteSpace(brand))
+        {
+            throw new InvalidOperationException("Brand is required for branded products");
+        }
+        return brand.Trim();
+    }
+
+    private static ProductReviewStatus GetReviewStatusForCreate(ProductSourceType sourceType)
+    {
+        return sourceType == ProductSourceType.Branded ? ProductReviewStatus.PendingReview : ProductReviewStatus.NotSubmitted;
+    }
+
+    private static ProductReviewStatus GetReviewStatusForUpdate(Product existingProduct, 
+        bool userOwnsProduct, ProductSourceType sourceType)
+    {
+        if (!userOwnsProduct)
+        {
+            return ProductReviewStatus.NotSubmitted;
+        }
+
+        if(sourceType == ProductSourceType.Custom)
+        {
+            return ProductReviewStatus.NotSubmitted;
+        }
+
+        if(existingProduct.ReviewStatus == ProductReviewStatus.PendingReview)
+        {
+            return ProductReviewStatus.PendingReview;
+        }
+
+        return ProductReviewStatus.NotSubmitted;
     }
 }

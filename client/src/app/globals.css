@@ -31,3 +31,15 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.input input[type="number"]::-webkit-outer-spin-button,
+.input input[type="number"]::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.input input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}

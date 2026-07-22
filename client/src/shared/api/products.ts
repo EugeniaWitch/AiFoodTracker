@@ -2,6 +2,7 @@ import type {
     CreateProductRequest,
     ProductResponse,
     ProductType,
+    UpdateProductRequest
 } from "@/shared/types/product";
 
 const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000").replace(/\/$/,"");
@@ -76,6 +77,35 @@ export async function createProduct(token:string, data:CreateProductRequest):Pro
         }
 
         throw new Error(`Failed to create product. Status: ${response.status}`);
+    }
+
+    return response.json();
+}
+
+export async function updateProduct(
+    token: string,
+    productId: string,
+    data: UpdateProductRequest,
+): Promise<ProductResponse>{
+    const response = await fetch(`${API_URL}/api/products/${productId}`,{
+        method:"PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+    });
+
+    if (!response.ok){
+        const contentType = response.headers.get("content-type");
+
+        if (contentType?.includes("json")){
+            const error = await response.json();
+
+            throw new Error(getErrorMessage(error,`Failed to update product. Status: ${response.status}`));
+        }
+
+        throw new Error(`Failed to load update product. Status: ${response.status}`);
     }
 
     return response.json();

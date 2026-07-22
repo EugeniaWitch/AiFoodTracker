@@ -5,9 +5,10 @@ import styles from "./ProductList.module.css";
 type ProductListProps ={
     products: ProductResponse[];
     isLoading: boolean;
+    onEdit: (product: ProductResponse) => void;
 }
 
-export function ProductList({products,isLoading}: ProductListProps){
+export function ProductList({products,isLoading,onEdit}: ProductListProps){
     if (isLoading){
         return <p>Загрузка продуктов</p>
     }
@@ -19,7 +20,7 @@ export function ProductList({products,isLoading}: ProductListProps){
     return (
         <ul className={styles.list}>
             {products.map((product) => 
-                (<ProductListItem key={product.id} product={product}></ProductListItem>))}
+                (<ProductListItem key={product.id} product={product} onEdit={onEdit}></ProductListItem>))}
         </ul>
     )
 }

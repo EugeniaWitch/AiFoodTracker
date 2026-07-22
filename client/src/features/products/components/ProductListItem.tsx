@@ -8,9 +8,10 @@ import styles from "./ProductList.module.css";
 
 type ProductListItemProps = {
     product: ProductResponse;
+    onEdit: (product: ProductResponse) => void;
 }
 
-export function ProductListItem({product}: ProductListItemProps){
+export function ProductListItem({product, onEdit}: ProductListItemProps){
     const [isExpanded, setIsExpanded] = useState(false);
 
     return(
@@ -31,7 +32,7 @@ export function ProductListItem({product}: ProductListItemProps){
                 </div>
             </div>
             
-            {isExpanded && <ProductDetails product={product}/>}
+            {isExpanded && <ProductDetails product={product} onEdit={onEdit}/>}
         </li>
     )
 }

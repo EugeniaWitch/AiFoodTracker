@@ -9,7 +9,6 @@ public class CreateProductRequest
     [StringLength(100,MinimumLength = 2, ErrorMessage = "Name must be between 2 and 100 characters")]
     public string Name{get;set;} = string.Empty;
 
-    [Required(ErrorMessage ="Brand is required")]
     [StringLength(100,MinimumLength =2, ErrorMessage ="Brand must be between 2 and 100 characters")]
     public string? Brand{get;set;}
 
@@ -19,7 +18,8 @@ public class CreateProductRequest
     [Required(ErrorMessage ="CategoryId is required")]
     public Guid CategoryId{get;set;}
 
-    public ProductVisibility Visibility{get;set;} = ProductVisibility.Private;
+    [Required(ErrorMessage = "SourceType is required")]
+    public ProductSourceType? SourceType {get;set;}
 
     [Range(0,10000, ErrorMessage ="Calories must be greater than or equal to 0")]
     public double Calories{get;set;}

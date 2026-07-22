@@ -8,7 +8,9 @@ public class Product
     public string Name{get;set;}=string.Empty;
     public string? Brand{get;set;}
     public ProductType Type{get;set;}
-    public ProductVisibility Visibility{get;set;} = ProductVisibility.Public;
+    public ProductVisibility Visibility{get;set;} = ProductVisibility.Private;
+    public ProductSourceType SourceType{get;set;}
+    public ProductReviewStatus ReviewStatus{get;set;}=ProductReviewStatus.NotSubmitted;
     
     public Guid CategoryId{get;set;}
     public ProductCategory Category{get;set;} = null!;

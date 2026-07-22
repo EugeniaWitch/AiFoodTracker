@@ -1,5 +1,6 @@
 import type { ProductType } from "@/shared/types/product";
 import { productTypes } from "../lib/productFormatting";
+import styles from "./ProductFilters.module.css";
 
 type ProductFiltersProps ={
     selectedType: ProductType;
@@ -17,11 +18,9 @@ export function ProductFilters({
     onSearchSubmit
 }: ProductFiltersProps){
     return (
-        <section>
-            <h2>Фильтр</h2>
-
-            <label>
-                Тип:
+        <section className={styles.filters}>
+            <div className={styles.select}>
+                <label>Тип</label>
                 <select
                 value={selectedType}
                 onChange={(event) => onTypeChange(event.target.value as ProductType)}>
@@ -29,17 +28,17 @@ export function ProductFilters({
                         {type=== "Food" ? "Еда" : "Напитки"}
                     </option>))}
                 </select>
-            </label>
-
-            <label>
-                Поиск:
-                <input
+            </div>
+           
+            <div className={styles.search}>
+                <label>Поиск</label>
+                <input className={styles.input}
                 value={search}
                 onChange={(event) => onSearchChange(event.target.value)}
                 placeholder="Например: сосиски"></input>
-            </label>
-
-            <button type="button" onClick={onSearchSubmit}>
+            </div>
+            
+            <button type="button" onClick={onSearchSubmit} className={styles.button}>
                 Найти
             </button>
         </section>

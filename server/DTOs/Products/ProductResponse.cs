@@ -7,6 +7,8 @@ public class ProductResponse
     public string? Brand{get;set;}
     public string Type{get;set;} =string.Empty;
     public string Visibility{get;set;} =string.Empty;
+    public string SourceType{get;set;}=string.Empty;
+    public string ReviewStatus{get;set;}=string.Empty;
     public Guid CategoryId{get;set;}
     public string CategoryName{get;set;}=string.Empty;
     public Guid? OwnerId{get;set;}

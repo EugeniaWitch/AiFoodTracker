@@ -12,6 +12,8 @@ import { ProductFilters } from "@/features/products/components/ProductFilters";
 import { ProductList } from "@/features/products/components/ProductList";
 import { ProductModal } from "@/features/products/components/ProductModal";
 import { ProductCreateForm } from "@/features/products/components/ProductCreateForm";
+import { ProductEditForm } from "@/features/products/components/ProductEditForm";
+import styles from "./page.module.css";
 
 export default function ProductsPage() {
   const { isLoading: isUserLoading } = useCurrentUser();
@@ -24,6 +26,8 @@ export default function ProductsPage() {
 
   const [error, setError] = useState("");
   const [isLoadingProducts, setIsLoadingProducts] = useState(false);
+
+  const [editingProduct, setEditingProduct] = useState<ProductResponse | null>(null);
 
   async function loadProducts() {
     const token = getAuthToken();
@@ -64,19 +68,20 @@ export default function ProductsPage() {
   }
 
   return (
-    <main>
-      <h1>Продукты</h1>
+    <main className={styles.page}>
+      <div className={styles.header}>
+        <ProductFilters
+        selectedType={selectedType}
+        search={search}
+        onTypeChange={setSelectedType}
+        onSearchChange={setSearch}
+        onSearchSubmit={loadProducts}></ProductFilters>
 
-      <ProductFilters
-      selectedType={selectedType}
-      search={search}
-      onTypeChange={setSelectedType}
-      onSearchChange={setSearch}
-      onSearchSubmit={loadProducts}></ProductFilters>
-
-      <button type="button" onClick={() => setIsCreateModalOpen(true)}>
-        Добавить новый продукт
-      </button>
+        <button type="button" onClick={() => setIsCreateModalOpen(true)} className={styles.button}>
+          Добавить новый продукт
+        </button>
+      </div>
+      
 
       <ProductModal
         title="Добавить новый продукт"
@@ -90,12 +95,24 @@ export default function ProductsPage() {
           onCancel={() => setIsCreateModalOpen(false)}/>
       </ProductModal>
 
-      <section>
-        <h2>Список продуктов</h2>
+      <ProductModal
+        title="Изменить КБЖУ"
+        isOpen={editingProduct !==null}
+        onClose={() => setEditingProduct(null)}>
+          {editingProduct &&
+            <ProductEditForm
+              product={editingProduct}
+              onUpdated={async () => {
+                await loadProducts();
+                setEditingProduct(null);
+              }}
+              onCancel={() => setEditingProduct(null)}/>}
+      </ProductModal>
 
-        <ProductList products={products}
-        isLoading={isLoadingProducts}></ProductList>
-      </section>
+      <ProductList 
+        products={products}
+        isLoading={isLoadingProducts}
+        onEdit={setEditingProduct}/>
     </main>
   );
 }
